@@ -1,36 +1,62 @@
-const dates = [
+import { dateType } from "./DateType";
+
+export const birthdays = [
   {
+    type: dateType.birthday,
     name: 'Matt',
-    birthday: new Date(1982, 5, 18)
+    birthday: new Date('June 18 1982'),
   },
   {
+    type: dateType.birthday,
     name: 'Shannon',
-    birthday: new Date(1987, 0, 5)
+    birthday: new Date('Jan 5 1987'),
   },
   {
+    type: dateType.birthday,
     name: 'Mason',
-    birthday: new Date(2016, 7, 16)
+    birthday: new Date('Aug 16 2011'),
   },
   {
+    type: dateType.birthday,
     name: 'Kenzie',
-    birthday: new Date(2008, 7, 31)
+    birthday: new Date('Aug 31 2008'),
   },
   {
+    type: dateType.birthday,
     name: 'Grandma',
-    birthday: new Date(1955, 9, 18)
+    birthday: new Date('Oct 18 1955'),
   },
   {
+    type: dateType.birthday,
     name: 'Grandpa',
-    birthday: new Date(1954, 4, 4)
+    birthday: new Date('May 5 1954'),
   },
   {
+    type: dateType.birthday,
     name: 'Jennifer',
-    birthday: new Date(1985, 3, 6)
+    birthday: new Date('Apr 6 1985'),
   },
   {
+    type: dateType.birthday,
     name: 'Caleb',
-    birthday: new Date(1981, 5, 28)
+    birthday: new Date('June 28 1981'),
   },
 ];
 
-export default dates;
+export const holidays = [
+  {
+    type: dateType.holiday,
+    name: 'Christmas',
+    date: new Date('Dec 25'),
+  },
+  {
+    type: dateType.holiday,
+    name: 'New Years',
+    date: new Date('Jan 1'),
+  },
+  {
+    type: dateType.holiday,
+    name: '4th of July',
+    date: new Date('July 4'),
+  },
+]
