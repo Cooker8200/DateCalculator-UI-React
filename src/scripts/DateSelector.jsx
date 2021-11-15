@@ -1,30 +1,33 @@
 import React from 'react';
 import { ListSubheader, MenuItem, Select } from '@material-ui/core';
-import { birthdays, holidays } from '../constants/Dates';
+import * as Dates from '../constants/Dates';
+import { concat } from 'lodash';
 
 const DateSelector = ({ onDateSelection }) => {
+  const allDates = concat(Dates.birthdays, Dates.holidays);
+
   const handleDateSelection = (event) => {
     const value = event.target.value;
-    const dateObject = birthdays.find(birthday => birthday.name.toLowerCase() === value.toLowerCase());
+    const dateObject = allDates.find(date => date.date === value);
     onDateSelection(dateObject);
   };
 
   const renderBirthdayMenuItems = () => {
-    return birthdays.map(birthday => (
+    return Dates.birthdays.map(date => (
       <MenuItem
-        key={birthday.name}
-        value={birthday.name}
+        key={date.name}
+        value={date.date}
       >
-        {birthday.name.toString()}
+        {date.name.toString()}
       </MenuItem>
     ));
   };
 
   const renderImportanyDateMenuItems = () => {
-    return holidays.map(date => (
+    return Dates.holidays.map(date => (
       <MenuItem
         key={date.name}
-        value={date.name}
+        value={date.date}
       >
         {date.name.toString()}
       </MenuItem>
