@@ -1,7 +1,7 @@
 import React from 'react';
 import { ListSubheader, MenuItem, Select } from '@material-ui/core';
 import * as Dates from '../constants/Dates';
-import { concat } from 'lodash';
+import { concat, orderBy } from 'lodash';
 
 const DateSelector = ({ onDateSelection }) => {
   const allDates = concat(Dates.birthdays, Dates.holidays);
@@ -13,7 +13,7 @@ const DateSelector = ({ onDateSelection }) => {
   };
 
   const renderBirthdayMenuItems = () => {
-    return Dates.birthdays.map(date => (
+    return orderBy(Dates.birthdays, 'name').map(date => (
       <MenuItem
         key={date.name}
         value={date.date}
@@ -24,7 +24,7 @@ const DateSelector = ({ onDateSelection }) => {
   };
 
   const renderImportanyDateMenuItems = () => {
-    return Dates.holidays.map(date => (
+    return orderBy(Dates.holidays, 'name').map(date => (
       <MenuItem
         key={date.name}
         value={date.date}
