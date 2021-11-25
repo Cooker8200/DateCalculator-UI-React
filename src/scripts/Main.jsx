@@ -4,7 +4,7 @@ import { Grid, Typography } from '@material-ui/core';
 import DateSelector from './DateSelector';
 import DateResults from './DateResults';
 import { dateType } from '../constants/DateType';
-import { calculateBirthday, calculateHoliday } from '../utils/DateCalculations';
+import { calculateDayDifference } from '../utils/DateCalculations';
 
 const Main = () => {
   const [dateCalculationResult, setDateCalculationResult] = useState(undefined);
@@ -12,10 +12,10 @@ const Main = () => {
   const onDateSelection = (dateObject) => {
     switch (dateObject.type) {
       case dateType.birthday:
-        setDateCalculationResult(calculateBirthday(dateObject));
+        setDateCalculationResult(calculateDayDifference(dateObject));
         break;
       case dateType.holiday:
-        setDateCalculationResult(calculateHoliday(dateObject));
+        setDateCalculationResult(calculateDayDifference(dateObject));
         break;
       default:
         setDateCalculationResult(undefined);
