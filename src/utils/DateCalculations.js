@@ -1,12 +1,13 @@
 export const calculateDayDifference = (dateObject) => {
+  const parsedDate = new Date(dateObject.date);
   const currentDate = new Date().setHours(0,0,0,0);
-  const birthDay = dateObject.date.getDate();
-  const birthMonth = dateObject.date.getMonth();
+  const birthDay = parsedDate.getDate();
+  const birthMonth = parsedDate.getMonth();
   const currentBirthday = new Date(new Date().getFullYear(), birthMonth, birthDay).getTime();
   if (currentDate > currentBirthday) {
     // birthday has already passed in the current year
-    const nextBirthday = new Date(new Date().getFullYear() + 1, birthMonth, birthDay);
-    const dayDifference = Math.round((nextBirthday - currentDate) / (1000 * 60 * 60 * 24));
+    const nextOccuringDate = new Date(new Date().getFullYear() + 1, birthMonth, birthDay);
+    const dayDifference = Math.round((nextOccuringDate - currentDate) / (1000 * 60 * 60 * 24));
     return {
       name: dateObject.name,
       birthday: dateObject.date,

@@ -1,4 +1,4 @@
 export const dateType = {
-  'birthday': 'Birthday',
-  'holiday': 'Holiday'
+  'birthday': 'birthday',
+  'holiday': 'holiday'
 };
