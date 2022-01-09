@@ -5,7 +5,7 @@ export const calculateDayDifference = (dateObject) => {
   const birthMonth = parsedDate.getMonth();
   const currentBirthday = new Date(new Date().getFullYear(), birthMonth, birthDay).getTime();
   if (currentDate > currentBirthday) {
-    // birthday has already passed in the current year
+    // day has already passed in the current year
     const nextOccuringDate = new Date(new Date().getFullYear() + 1, birthMonth, birthDay);
     const dayDifference = Math.round((nextOccuringDate - currentDate) / (1000 * 60 * 60 * 24));
     return {
@@ -15,7 +15,7 @@ export const calculateDayDifference = (dateObject) => {
       type: dateObject.type,
     };
   } else if (currentDate < currentBirthday) {
-    // birthday has not passed in the current year
+    // day has not passed in the current year
     const dayDifference = Math.round((currentBirthday - currentDate) / (1000 * 60 * 60 * 24));
     return {
       name: dateObject.name,
@@ -24,7 +24,7 @@ export const calculateDayDifference = (dateObject) => {
       type: dateObject.type,
     }
   } else {
-    // birthday is today
+    // day is today
     return {
       name: dateObject.name,
       birthday: dateObject.date,

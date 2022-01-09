@@ -10,17 +10,7 @@ const Main = () => {
   const [dateCalculationResult, setDateCalculationResult] = useState(undefined);
 
   const onDateSelection = (dateObject) => {
-    switch (dateObject.type) {
-      case dateType.birthday:
-        setDateCalculationResult(calculateDayDifference(dateObject));
-        break;
-      case dateType.holiday:
-        setDateCalculationResult(calculateDayDifference(dateObject));
-        break;
-      default:
-        setDateCalculationResult(undefined);
-        break;
-    }
+    setDateCalculationResult(calculateDayDifference(dateObject));
   };
 
   return (

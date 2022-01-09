@@ -4,7 +4,7 @@ import { orderBy } from 'lodash';
 import { getAllDates } from './data/AWS';
 
 const DateSelector = ({ onDateSelection }) => {
-  const [ dates, setDates ] = useState(undefined);
+  const [dates, setDates] = useState(undefined);
 
   useEffect(() => {
     const test = async () => {
@@ -22,21 +22,22 @@ const DateSelector = ({ onDateSelection }) => {
     onDateSelection(dateObject);
   };
 
-  const renderBirthdayMenuItems = () => {
-    return orderBy(dates.filter(date => date.type === 'birthday'), 'name')
-      .map(date => (
-      <MenuItem
-        key={date.name}
-        value={date.date}
-      >
-        {date.name.toString()}
-      </MenuItem>
-    ));
-  };
-
-  const renderImportanyDateMenuItems = () => {
-    return orderBy(dates.filter(date => date.type === 'holiday'), 'name')
-      .map(date => (
+  const renderMenuItems = (type) => {
+    let datesForMenuItems;
+    switch (type) {
+      case 'birthday':
+        datesForMenuItems = orderBy(dates.filter(date => date.type === 'birthday'), 'name');
+        break;
+      case 'holiday':
+        datesForMenuItems = orderBy(dates.filter(date => date.type === 'holiday'), 'name');
+        break;
+      case 'other':
+        datesForMenuItems = orderBy(dates.filter(date => date.type === 'other'), 'name');
+        break;
+      default:
+        break;
+    }
+    return datesForMenuItems.map(date => (
       <MenuItem
         key={date.name}
         value={date.date}
@@ -57,10 +58,18 @@ const DateSelector = ({ onDateSelection }) => {
           onChange={handleDateSelection}
         >
           <MenuItem value='' />
-          <ListSubheader>Birthdays</ListSubheader>
-          {renderBirthdayMenuItems()}
-          <ListSubheader>Holidays</ListSubheader>
-          {renderImportanyDateMenuItems()}
+          {dates.some(x => x.type === 'birthday') &&
+            <ListSubheader>Birthdays</ListSubheader>
+          }
+          {renderMenuItems('birthday')}
+          {dates.some(x => x.type === 'holiday') &&
+            <ListSubheader>Holidays</ListSubheader>
+          }
+          {renderMenuItems('holiday')}
+          {dates.some(x => x.type === 'other') &&
+            <ListSubheader>Other</ListSubheader>
+          }
+          {renderMenuItems('other')}
         </Select>
       </>
     )
