@@ -26,13 +26,13 @@ const DateSelector = ({ onDateSelection }) => {
     let datesForMenuItems;
     switch (type) {
       case 'birthday':
-        datesForMenuItems = orderBy(dates.filter(date => date.type === 'birthday'), 'name');
+        datesForMenuItems = orderBy(dates.filter(date => date.type === 'birthday'), 'date');
         break;
       case 'holiday':
-        datesForMenuItems = orderBy(dates.filter(date => date.type === 'holiday'), 'name');
+        datesForMenuItems = orderBy(dates.filter(date => date.type === 'holiday'), 'date');
         break;
       case 'other':
-        datesForMenuItems = orderBy(dates.filter(date => date.type === 'other'), 'name');
+        datesForMenuItems = orderBy(dates.filter(date => date.type === 'other'), 'date');
         break;
       default:
         break;
