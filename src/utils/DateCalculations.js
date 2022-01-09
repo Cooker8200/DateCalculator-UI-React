@@ -10,7 +10,7 @@ export const calculateDayDifference = (dateObject) => {
     const dayDifference = Math.round((nextOccuringDate - currentDate) / (1000 * 60 * 60 * 24));
     return {
       name: dateObject.name,
-      birthday: dateObject.date,
+      date: dateObject.date,
       daysToNextCelebration: dayDifference,
       type: dateObject.type,
     };
@@ -19,7 +19,7 @@ export const calculateDayDifference = (dateObject) => {
     const dayDifference = Math.round((currentBirthday - currentDate) / (1000 * 60 * 60 * 24));
     return {
       name: dateObject.name,
-      birthday: dateObject.date,
+      date: dateObject.date,
       daysToNextCelebration: dayDifference,
       type: dateObject.type,
     }
@@ -27,7 +27,7 @@ export const calculateDayDifference = (dateObject) => {
     // day is today
     return {
       name: dateObject.name,
-      birthday: dateObject.date,
+      date: dateObject.date,
       daysToNextCelebration: 0,
       type: dateObject.type,
     }
