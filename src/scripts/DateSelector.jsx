@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ListSubheader, MenuItem, Select } from '@material-ui/core';
+import { ListSubheader, MenuItem, Select } from '@mui/material';
 import { orderBy } from 'lodash';
 import { getAllDates } from './data/AWS';
 
