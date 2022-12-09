@@ -1,3 +1,9 @@
 .date-selector__select {
   width: 250px;
 }
+
+.admin-dialog__add__select,
+.admin-dialog__add__textfield {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}

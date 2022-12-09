@@ -12,7 +12,6 @@ export const putNewDate = async (newDate) => {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
     },
     body: JSON.stringify(newDate)
   })
@@ -24,7 +23,6 @@ export const removeDate = async (dateToRemove) => {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
     },
     body: JSON.stringify(dateToRemove)
   })

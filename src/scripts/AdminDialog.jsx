@@ -75,12 +75,22 @@ const AdminDialog = ({ dates, showDialog, handleCloseDialog, handleSaveClick }) 
                   renderInput={(params) => <TextField {...params} />}
                 />
               </LocalizationProvider>
-              <Select onChange={handleTypeChange}>
+              <Select
+                fullWidth
+                label='Choose Date Type'
+                onChange={handleTypeChange}
+                className='admin-dialog__add__select'
+              >
                 <MenuItem value='birthday'>Birthday</MenuItem>
                 <MenuItem value='holiday'>Holiday</MenuItem>
                 <MenuItem value='other'>Other</MenuItem>
               </Select>
-              <TextField onChange={handleNameChange} />
+              <TextField
+                fullWidth
+                label='Date Name'
+                onChange={handleNameChange}
+                className='admin-dialog__add__textfield'
+              />
             </>
           }
           {dateFunction === 'removeDate' &&
