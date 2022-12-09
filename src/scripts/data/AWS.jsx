@@ -8,11 +8,25 @@ export const getAllDates = async () => {
 };
 
 export const putNewDate = async (newDate) => {
-  return fetch(datesUrl, { method: 'PUT', body: JSON.stringify(newDate)})
-    .catch(err => console.error(err));
+  return fetch(datesUrl, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
+    body: JSON.stringify(newDate)
+  })
+  .catch(err => console.error(err));
 };
 
 export const removeDate = async (dateToRemove) => {
-  return fetch(datesUrl, { method: 'DELETE', body: JSON.stringify(dateToRemove)})
-    .catch(err => console.error(err));
+  return fetch(datesUrl, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    },
+    body: JSON.stringify(dateToRemove)
+  })
+  .catch(err => console.error(err));
 };

@@ -1,20 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ListSubheader, MenuItem, Select } from '@mui/material';
 import { orderBy } from 'lodash';
-import { getAllDates } from './data/AWS';
 
-const DateSelector = ({ onDateSelection }) => {
-  const [dates, setDates] = useState(undefined);
-
-  useEffect(() => {
-    const test = async () => {
-      await getAllDates()
-        .then(resp => setDates(JSON.parse(resp)))
-        .catch(err => console.log(err.message));
-    };
-
-    test();
-  }, []);
+const DateSelector = ({ dates, onDateSelection }) => {
 
   const handleDateSelection = (event) => {
     const value = event.target.value;
