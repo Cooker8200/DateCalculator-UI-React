@@ -45,7 +45,6 @@ const DateSelector = ({ dates, onDateSelection }) => {
           className='date-selector__select'
           onChange={handleDateSelection}
         >
-          <MenuItem value='' />
           {dates.some(x => x.type === 'birthday') &&
             <ListSubheader>Birthdays</ListSubheader>
           }

@@ -11,6 +11,7 @@ const AdminDialog = ({ dates, showDialog, handleCloseDialog, handleSaveClick }) 
   const [date, setDate] = useState(undefined);
   const [name, setName] = useState(undefined);
   const [type, setType] = useState(undefined);
+  const [dateToDelete, setDateToDelete] = useState(undefined);
 
   const handleRadioChange = (functionType) => setDateFunction(functionType);
 
@@ -28,6 +29,10 @@ const AdminDialog = ({ dates, showDialog, handleCloseDialog, handleSaveClick }) 
   const handleTypeChange = (event) => {
     const value = event.target.value;
     setType(value);
+  };
+
+  const onDeleteItemChange = (value) => {
+    setDateToDelete(value)
   };
 
   return (
@@ -94,7 +99,7 @@ const AdminDialog = ({ dates, showDialog, handleCloseDialog, handleSaveClick }) 
             </>
           }
           {dateFunction === 'removeDate' &&
-            <DeleteDate dates={dates} />
+            <DeleteDate dates={dates} onDeleteItemChange={onDeleteItemChange}/>
           }
         </DialogContent>
         <DialogActions>
@@ -105,7 +110,7 @@ const AdminDialog = ({ dates, showDialog, handleCloseDialog, handleSaveClick }) 
               </Button>
             </Grid>
             <Grid item>
-              <Button onClick={() => handleSaveClick(dateFunction, date, name, type)}>
+              <Button onClick={() => handleSaveClick(dateFunction, date, name, type, dateToDelete)}>
                 Save
               </Button>
             </Grid>

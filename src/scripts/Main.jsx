@@ -6,7 +6,7 @@ import DateSelector from './DateSelector';
 import DateResults from './DateResults';
 import { calculateDayDifference } from '../utils/DateCalculations';
 import AdminDialog from './AdminDialog';
-import { getAllDates, putNewDate } from './data/AWS';
+import { getAllDates, putNewDate, removeDate } from './data/AWS';
 
 const Main = () => {
   const [dates, setDates] = useState(undefined);
@@ -25,15 +25,17 @@ const Main = () => {
 
   const handleCloseDialog = () => setShowAdminDialog(false);
 
-  const handleSaveClick = (dateFunction, date, name, type) => {
-    console.log(dateFunction);
+  const handleSaveClick = (dateFunction, date, name, type, dateToDelete) => {
     switch (dateFunction){
       case 'addDate':
         putNewDate({ date, name, type });
         break;
+      case 'removeDate':
+        removeDate({ name: dateToDelete });
       default:
         console.warn('Hit the default case');
     }
+    handleCloseDialog();
   };
 
   return (
