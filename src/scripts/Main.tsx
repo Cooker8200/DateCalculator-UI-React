@@ -3,35 +3,39 @@ import { useEffect, useState } from 'react';
 import { Grid, Typography, IconButton } from '@mui/material';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import DateSelector from './DateSelector';
-import DateResults from './DateResults';
+import DateResults from './DateResult';
 import { calculateDayDifference } from '../utils/DateCalculations';
 import AdminDialog from './AdminDialog';
 import { getAllDates, putNewDate, removeDate } from './data/AWS';
+import { IDate } from '../interfaces/IDate';
 
-const Main = () => {
-  const [dates, setDates] = useState(undefined);
-  const [dateCalculationResult, setDateCalculationResult] = useState(undefined);
-  const [showAdminDialog, setShowAdminDialog] = useState(false);
+const Main: React.FC = () => {
+  const [dates, setDates] = useState<IDate[]>([]);
+  const [selectedDate, setSelectedDate] = useState<IDate | undefined>(undefined);
+  const [daysToSelectedDate, setDaysToSelectedDate] = useState<number | undefined>(undefined);
+  const [showAdminDialog, setShowAdminDialog] = useState<boolean>(false);
 
   useEffect(() => {
     getAllDates()
-      .then(resp => setDates(JSON.parse(resp)))
-      .catch(err => console.log(err.message));
+      .then(resp => setDates(resp))
+      .catch(err => console.error(err.message));
   }, []);
 
-  const onDateSelection = (dateObject) => {
-    setDateCalculationResult(calculateDayDifference(dateObject));
+  const onDateSelect = (date: IDate): void => {
+    setSelectedDate(date);
+    setDaysToSelectedDate(calculateDayDifference(date));
   };
 
-  const handleCloseDialog = () => setShowAdminDialog(false);
+  const handleCloseDialog = (): void => setShowAdminDialog(false);
 
-  const handleSaveClick = (dateFunction, date, name, type, dateToDelete) => {
+  const handleSaveClick = (dateFunction: string, date: string, name: string, type: string, dateToDelete: string): void => {
     switch (dateFunction){
       case 'addDate':
         putNewDate({ date, name, type });
         break;
       case 'removeDate':
-        removeDate({ name: dateToDelete });
+        removeDate(dateToDelete);
+        break;
       default:
         console.warn('Hit the default case');
     }
@@ -55,14 +59,20 @@ const Main = () => {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <DateSelector dates={dates} onDateSelection={onDateSelection}/>
+          <DateSelector
+            dates={dates}
+            onDateSelect={onDateSelect}
+          />
           <IconButton onClick={() => setShowAdminDialog(true)}>
             <SettingsOutlinedIcon />
           </IconButton>
         </Grid>
-        {dateCalculationResult !== undefined &&
+        {selectedDate !== undefined && daysToSelectedDate !== undefined &&
           <Grid item xs={12}>
-            <DateResults results={dateCalculationResult}/>
+            <DateResults
+              selectedDate={selectedDate}
+              daysToSelectedDate={daysToSelectedDate}
+            />
           </Grid>
         }
       </Grid>

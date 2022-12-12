@@ -1,18 +1,23 @@
 import React from 'react';
-import { ListSubheader, MenuItem, Select } from '@mui/material';
+import { ListSubheader, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { orderBy } from 'lodash';
+import { IDate } from '../interfaces/IDate';
 
-const DateSelector = ({ dates, onDateSelection }) => {
+const DateSelector: React.FC<IDateSelectorProps> = ({
+  dates,
+  onDateSelect
+}) => {
 
-  const handleDateSelection = (event) => {
+  const handleDateSelection = (event: SelectChangeEvent<string>) => {
     const value = event.target.value;
-    const dateObject = dates.find(date => date.date === value);
-    onDateSelection(dateObject);
+    const date = dates.find(d => d.date === value);
+    // @ts-ignore
+    onDateSelect(date);
   };
 
-  const renderMenuItems = (type) => {
-    let datesForMenuItems;
-    switch (type) {
+  const renderMenuItems = (dateType: string) => {
+    let datesForMenuItems: IDate[] = [];
+    switch (dateType) {
       case 'birthday':
         datesForMenuItems = orderBy(dates.filter(date => date.type === 'birthday'), 'date');
         break;
@@ -25,7 +30,8 @@ const DateSelector = ({ dates, onDateSelection }) => {
       default:
         break;
     }
-    return datesForMenuItems.map(date => (
+
+    return datesForMenuItems.map((date: IDate) => (
       <MenuItem
         key={date.name}
         value={date.date}
@@ -62,5 +68,10 @@ const DateSelector = ({ dates, onDateSelection }) => {
     )
   }
 };
+
+interface IDateSelectorProps {
+  dates: IDate[];
+  onDateSelect: (date: IDate) => void;
+}
 
 export default DateSelector;
