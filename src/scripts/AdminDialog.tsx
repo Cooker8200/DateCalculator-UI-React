@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormLabel, Grid, Radio, Typography } from '@mui/material';
 import DeleteDate from './DeleteDate';
 import AddDate from './AddDate';
@@ -17,10 +17,14 @@ const AdminDialog: React.FC<IAdminDialogProps> = ({
   const [type, setType] = useState<string>('');
   const [dateToDelete, setDateToDelete] = useState<string>('');
 
+  useEffect(() => {
+    onDateChange(new Date());
+  }, [])
+
   const handleRadioChange = (functionType: string) => setDateFunction(functionType);
 
   const onDateChange = (date: Date) => {
-    const formattedDate = `${months[date.getMonth()]} ${date.getDay()} ${date.getFullYear()}`;
+    const formattedDate = `${months[date.getMonth()]} ${date.getDate()} ${date.getFullYear()}`;
     setDate(formattedDate);
   };
 
@@ -30,6 +34,14 @@ const AdminDialog: React.FC<IAdminDialogProps> = ({
 
   const onDeleteItemChange = (name: string) => {
     setDateToDelete(name)
+  };
+
+  const isSaveDisabled = (): boolean => {
+    if (dateFunction === 'addDate') {
+      return name === '' || type === '';
+    } else {
+      return dateToDelete === '';
+    }
   };
 
   return (
@@ -88,7 +100,10 @@ const AdminDialog: React.FC<IAdminDialogProps> = ({
               </Button>
             </Grid>
             <Grid item>
-              <Button onClick={() => onSave(dateFunction, date, name, type, dateToDelete)}>
+              <Button
+                onClick={() => onSave(dateFunction, date, name, type, dateToDelete)}
+                disabled={isSaveDisabled()}
+              >
                 Save
               </Button>
             </Grid>

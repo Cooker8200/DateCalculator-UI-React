@@ -1,6 +1,7 @@
 import React from 'react';
-import { MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { ListSubheader, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { IDate } from '../interfaces/IDate';
+import { orderBy } from 'lodash';
 
 const DeleteDate: React.FC<IDeleteDateProps> = ({
   dates,
@@ -11,10 +12,26 @@ const DeleteDate: React.FC<IDeleteDateProps> = ({
     onDeleteItemChange(value);
   };
 
-  const renderMenuItems = () => {
-    return dates.map((date: IDate) => (
+  const renderMenuItems = (dateType: string) => {
+    let datesForMenuItems: IDate[] = [];
+    switch (dateType) {
+      case 'birthday':
+        datesForMenuItems = orderBy(dates.filter(date => date.type === 'birthday'), 'date');
+        break;
+      case 'holiday':
+        datesForMenuItems = orderBy(dates.filter(date => date.type === 'holiday'), 'date');
+        break;
+      case 'other':
+        datesForMenuItems = orderBy(dates.filter(date => date.type === 'other'), 'date');
+        break;
+      default:
+        break;
+    }
+
+    return datesForMenuItems.map((date: IDate) => (
       <MenuItem
-        value={date.name}
+        key={date.name}
+        value={date.date}
       >
         {date.name.toString()}
       </MenuItem>
@@ -27,7 +44,18 @@ const DeleteDate: React.FC<IDeleteDateProps> = ({
         onChange={handleItemChange}
         fullWidth
       >
-        {renderMenuItems()}
+        {dates.some(x => x.type === 'birthday') &&
+          <ListSubheader>Birthdays</ListSubheader>
+        }
+        {renderMenuItems('birthday')}
+        {dates.some(x => x.type === 'holiday') &&
+          <ListSubheader>Holidays</ListSubheader>
+        }
+        {renderMenuItems('holiday')}
+        {dates.some(x => x.type === 'other') &&
+          <ListSubheader>Other</ListSubheader>
+        }
+        {renderMenuItems('other')}
       </Select>
     </>
   )
