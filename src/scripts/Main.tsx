@@ -6,7 +6,7 @@ import DateSelector from './DateSelector';
 import DateResults from './DateResult';
 import { calculateDayDifference } from '../utils/DateCalculations';
 import AdminDialog from './AdminDialog';
-import { getAllDates, putNewDate, removeDate } from './data/AWS';
+import { getAllDates, putNewDate, removeDate } from './data/AwsClient';
 import { IDate } from '../interfaces/IDate';
 
 const Main: React.FC = () => {
@@ -26,20 +26,31 @@ const Main: React.FC = () => {
     setDaysToSelectedDate(calculateDayDifference(date));
   };
 
-  const handleCloseDialog = (): void => setShowAdminDialog(false);
+  const onDialogClose = (): void => setShowAdminDialog(false);
 
-  const handleSaveClick = (dateFunction: string, date: string, name: string, type: string, dateToDelete: string): void => {
+  const onSave = (dateFunction: string, date: string, name: string, type: string, dateToDelete: string): void => {
     switch (dateFunction){
       case 'addDate':
-        putNewDate({ date, name, type });
+        putNewDate({ date, name, type })
+          .then(() => {
+            getAllDates()
+            .then(resp => setDates(resp))
+            .catch(err => console.error(err.message))
+            .finally(() => onDialogClose());
+          });
         break;
       case 'removeDate':
-        removeDate(dateToDelete);
+        removeDate(dateToDelete)
+          .then(() => {
+            getAllDates()
+            .then(resp => setDates(resp))
+            .catch(err => console.error(err.message))
+            .finally(() => onDialogClose());
+          });
         break;
       default:
         console.warn('Hit the default case');
     }
-    handleCloseDialog();
   };
 
   return (
@@ -80,8 +91,8 @@ const Main: React.FC = () => {
         <AdminDialog
           dates={dates}
           showDialog={showAdminDialog}
-          handleCloseDialog={handleCloseDialog}
-          handleSaveClick={handleSaveClick}
+          onDialogClose={onDialogClose}
+          onSave={onSave}
         />
       }
     </>
