@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormLabel, Grid, Radio, Typography } from '@mui/material';
 import DeleteDate from './DeleteDate';
 import AddDate from './AddDate';
-import { months } from '../constants/Months';
-import { IDate } from '../interfaces/IDate';
+import { months } from '../../constants/Months';
+import { IDate } from '../../interfaces/IDate';
 
 const AdminDialog: React.FC<IAdminDialogProps> = ({
   dates,

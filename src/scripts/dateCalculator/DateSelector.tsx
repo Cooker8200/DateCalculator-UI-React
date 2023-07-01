@@ -1,7 +1,7 @@
 import React from 'react';
 import { ListSubheader, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 import { orderBy } from 'lodash';
-import { IDate } from '../interfaces/IDate';
+import { IDate } from '../../interfaces/IDate';
 
 const DateSelector: React.FC<IDateSelectorProps> = ({
   dates,

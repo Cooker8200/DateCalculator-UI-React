@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '@mui/material';
-import { dateType } from '../constants/DateType';
-import { IDate } from '../interfaces/IDate';
+import { dateType } from '../../constants/DateType';
+import { IDate } from '../../interfaces/IDate';
 
 const DateResult: React.FC<IDateResultProps> = ({
   selectedDate,

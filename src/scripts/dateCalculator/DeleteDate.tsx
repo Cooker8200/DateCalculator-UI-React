@@ -1,6 +1,6 @@
 import React from 'react';
 import { ListSubheader, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import { IDate } from '../interfaces/IDate';
+import { IDate } from '../../interfaces/IDate';
 import { orderBy } from 'lodash';
 
 const DeleteDate: React.FC<IDeleteDateProps> = ({
