@@ -31,7 +31,7 @@ const DeleteDate: React.FC<IDeleteDateProps> = ({
     return datesForMenuItems.map((date: IDate) => (
       <MenuItem
         key={date.name}
-        value={date.date}
+        value={date.name}
       >
         {date.name.toString()}
       </MenuItem>
