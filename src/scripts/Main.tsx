@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { Grid, Typography, IconButton } from '@mui/material';
+import { Grid, Typography, IconButton, Tooltip } from '@mui/material';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import DateSelector from './DateSelector';
 import DateResults from './DateResult';
@@ -64,19 +64,25 @@ const Main: React.FC = () => {
       >
         <Grid item xs={12}>
           <Typography
-            variant='h2'
+            variant='h3'
           >
-            Family Dates Tracker
+            Date Calculator
           </Typography>
         </Grid>
-        <Grid item xs={12}>
-          <DateSelector
-            dates={dates}
-            onDateSelect={onDateSelect}
-          />
-          <IconButton onClick={() => setShowAdminDialog(true)}>
-            <SettingsOutlinedIcon />
-          </IconButton>
+        <Grid item xs={12} container justifyContent='center' alignItems='center'>
+          <Grid item alignItems='center' spacing={2}>
+            <DateSelector
+              dates={dates}
+              onDateSelect={onDateSelect}
+            />
+          </Grid>
+          <Grid item>
+            <Tooltip title='Manage Dates'>
+              <IconButton onClick={() => setShowAdminDialog(true)}>
+                <SettingsOutlinedIcon />
+              </IconButton>
+            </Tooltip>
+          </Grid>
         </Grid>
         {selectedDate !== undefined && daysToSelectedDate !== undefined &&
           <Grid item xs={12}>

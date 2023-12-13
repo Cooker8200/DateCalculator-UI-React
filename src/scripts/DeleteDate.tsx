@@ -1,5 +1,5 @@
-import React from 'react';
-import { ListSubheader, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import React, { ChangeEvent } from 'react';
+import { ListSubheader, MenuItem, TextField } from '@mui/material';
 import { IDate } from '../interfaces/IDate';
 import { orderBy } from 'lodash';
 
@@ -7,7 +7,7 @@ const DeleteDate: React.FC<IDeleteDateProps> = ({
   dates,
   onDeleteItemChange
 }) => {
-  const handleItemChange = (event: SelectChangeEvent<string>) => {
+  const handleItemChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const value = event.target.value;
     onDeleteItemChange(value);
   };
@@ -33,15 +33,18 @@ const DeleteDate: React.FC<IDeleteDateProps> = ({
         key={date.name}
         value={date.name}
       >
-        {date.name.toString()}
+        {`${date.name} (${date.date})`}
       </MenuItem>
     ))
   };
 
   return (
     <>
-      <Select
-        onChange={handleItemChange}
+      <TextField
+        select
+        variant='standard'
+        label='Select a Date'
+        onChange={(e) => handleItemChange(e)}
         fullWidth
       >
         {dates.some(x => x.type === 'birthday') &&
@@ -56,7 +59,7 @@ const DeleteDate: React.FC<IDeleteDateProps> = ({
           <ListSubheader>Other</ListSubheader>
         }
         {renderMenuItems('other')}
-      </Select>
+      </TextField>
     </>
   )
 };

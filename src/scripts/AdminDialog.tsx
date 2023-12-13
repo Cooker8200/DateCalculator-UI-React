@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormLabel, Grid, Radio, Typography } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormLabel, Grid, IconButton, Radio, Typography } from '@mui/material';
 import DeleteDate from './DeleteDate';
 import AddDate from './AddDate';
 import { months } from '../constants/Months';
 import { IDate } from '../interfaces/IDate';
+import { Clear } from '@mui/icons-material';
 
 const AdminDialog: React.FC<IAdminDialogProps> = ({
   dates,
@@ -11,7 +12,7 @@ const AdminDialog: React.FC<IAdminDialogProps> = ({
   onDialogClose,
   onSave,
 }) => {
-  const [dateFunction, setDateFunction] = useState<string>('');
+  const [dateFunction, setDateFunction] = useState<string>('addDate');
   const [date, setDate] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [type, setType] = useState<string>('');
@@ -49,18 +50,26 @@ const AdminDialog: React.FC<IAdminDialogProps> = ({
       <Dialog
         open={showDialog}
         onClose={onDialogClose}
+        fullWidth
+        classes={{ paper: 'admin-dialog__paper' }}
       >
         <DialogTitle>
-          Date Admin
-        </DialogTitle>
-        <DialogContent>
-          <Grid container direction='column'>
-            <Grid item xs={12}>
-              <Typography>
-                What do you want to do?
+          <Grid container alignItems='center'>
+            <Grid item xs={1}>
+              <IconButton onClick={() => onDialogClose()}>
+                <Clear />
+              </IconButton>
+            </Grid>
+            <Grid item xs={11}>
+              <Typography variant='h5'>
+                Manage Dates
               </Typography>
             </Grid>
-            <Grid item xs={12}>
+          </Grid>
+        </DialogTitle>
+        <DialogContent>
+          <Grid container direction='row' alignItems='center' spacing={3}>
+            <Grid item>
               <Radio
                 checked={dateFunction === 'addDate'}
                 onChange={e => handleRadioChange(e.target.value)}
@@ -69,7 +78,7 @@ const AdminDialog: React.FC<IAdminDialogProps> = ({
                 />
                 <FormLabel>Add Date</FormLabel>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item>
               <Radio
                 checked={dateFunction === 'removeDate'}
                 onChange={e => handleRadioChange(e.target.value)}
@@ -93,7 +102,7 @@ const AdminDialog: React.FC<IAdminDialogProps> = ({
           }
         </DialogContent>
         <DialogActions>
-          <Grid container>
+          <Grid container justifyContent='flex-end'>
             <Grid item>
               <Button onClick={onDialogClose}>
                 Cancel
@@ -104,7 +113,11 @@ const AdminDialog: React.FC<IAdminDialogProps> = ({
                 onClick={() => onSave(dateFunction, date, name, type, dateToDelete)}
                 disabled={isSaveDisabled()}
               >
-                Save
+                {dateFunction === 'addDate' ?
+                'Add Date'
+                :
+                'Remove Date'
+                }
               </Button>
             </Grid>
           </Grid>

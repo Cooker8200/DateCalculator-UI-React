@@ -1,7 +1,7 @@
 import React from 'react';
 import { LocalizationProvider, StaticDatePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { TextField, Select, MenuItem } from '@mui/material';
+import { TextField, MenuItem } from '@mui/material';
 
 const AddDate: React.FC<IAddDateProps> = ({
   onDateChange,
@@ -19,19 +19,22 @@ const AddDate: React.FC<IAddDateProps> = ({
           // renderInput={(params) => <TextField {...params} />}
         />
       </LocalizationProvider>
-      <Select
+      <TextField
+        select
         fullWidth
-        label='Choose Date Type'
+        label='Choose Type'
         onChange={(event) => onTypeChange(event.target.value as string)}
         className='admin-dialog__add__select'
+        variant='standard'
       >
         <MenuItem value='birthday'>Birthday</MenuItem>
         <MenuItem value='holiday'>Holiday</MenuItem>
         <MenuItem value='other'>Other</MenuItem>
-      </Select>
+      </TextField>
       <TextField
         fullWidth
         label='Date Name'
+        variant='standard'
         onChange={(event) => onNameChange(event.target.value)}
         className='admin-dialog__add__textfield'
       />

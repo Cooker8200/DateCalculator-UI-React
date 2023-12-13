@@ -1,5 +1,5 @@
-import React from 'react';
-import { ListSubheader, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import React, { ChangeEvent } from 'react';
+import { ListSubheader, MenuItem, TextField } from '@mui/material';
 import { orderBy } from 'lodash';
 import { IDate } from '../interfaces/IDate';
 
@@ -8,7 +8,7 @@ const DateSelector: React.FC<IDateSelectorProps> = ({
   onDateSelect
 }) => {
 
-  const handleDateSelection = (event: SelectChangeEvent<string>) => {
+  const handleDateSelection = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const value = event.target.value;
     const date = dates.find(d => d.date === value);
     // @ts-ignore
@@ -46,25 +46,26 @@ const DateSelector: React.FC<IDateSelectorProps> = ({
   }
   else {
     return (
-      <>
-        <Select
-          className='date-selector__select'
-          onChange={handleDateSelection}
-        >
-          {dates.some(x => x.type === 'birthday') &&
-            <ListSubheader>Birthdays</ListSubheader>
-          }
-          {renderMenuItems('birthday')}
-          {dates.some(x => x.type === 'holiday') &&
-            <ListSubheader>Holidays</ListSubheader>
-          }
-          {renderMenuItems('holiday')}
-          {dates.some(x => x.type === 'other') &&
-            <ListSubheader>Other</ListSubheader>
-          }
-          {renderMenuItems('other')}
-        </Select>
-      </>
+      <TextField
+        select
+        className='date-selector__select'
+        onChange={(e) => handleDateSelection(e)}
+        variant='standard'
+        label='Choose a Date'
+      >
+        {dates.some(x => x.type === 'birthday') &&
+          <ListSubheader>Birthdays</ListSubheader>
+        }
+        {renderMenuItems('birthday')}
+        {dates.some(x => x.type === 'holiday') &&
+          <ListSubheader>Holidays</ListSubheader>
+        }
+        {renderMenuItems('holiday')}
+        {dates.some(x => x.type === 'other') &&
+          <ListSubheader>Other</ListSubheader>
+        }
+        {renderMenuItems('other')}
+      </TextField>
     )
   }
 };
