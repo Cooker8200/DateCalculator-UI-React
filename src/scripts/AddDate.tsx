@@ -1,6 +1,6 @@
 import React from 'react';
-import { LocalizationProvider, StaticDatePicker } from '@mui/lab';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { LocalizationProvider, StaticDatePicker } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { TextField, Select, MenuItem } from '@mui/material';
 
 const AddDate: React.FC<IAddDateProps> = ({
@@ -16,7 +16,7 @@ const AddDate: React.FC<IAddDateProps> = ({
           openTo="day"
           value={new Date()}
           onChange={(date) => onDateChange(date as Date)}
-          renderInput={(params) => <TextField {...params} />}
+          // renderInput={(params) => <TextField {...params} />}
         />
       </LocalizationProvider>
       <Select
