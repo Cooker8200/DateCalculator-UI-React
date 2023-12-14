@@ -36,15 +36,18 @@ const DateSelector: React.FC<IDateSelectorProps> = ({
         key={date.name}
         value={date.date}
       >
-        {date.name.toString()}
+        {dateType === 'birthday' ?
+          `${date.name.toString()}'s Birthday`
+          :
+          date.name.toString()
+        }
       </MenuItem>
     ))
   };
 
   if (dates === undefined) {
     return (<>Loading...</>);
-  }
-  else {
+  } else {
     return (
       <TextField
         select

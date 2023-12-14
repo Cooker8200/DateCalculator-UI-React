@@ -64,13 +64,18 @@ const Main: React.FC = () => {
       >
         <Grid item xs={12}>
           <Typography
-            variant='h3'
+            variant='h4'
           >
             Date Calculator
           </Typography>
         </Grid>
         <Grid item xs={12} container justifyContent='center' alignItems='center'>
           <Grid item alignItems='center' spacing={2}>
+          <Typography
+                variant='h5'
+              >
+                How many days until...
+              </Typography>
             <DateSelector
               dates={dates}
               onDateSelect={onDateSelect}
