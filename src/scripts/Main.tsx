@@ -65,6 +65,7 @@ const Main: React.FC = () => {
         <Grid item xs={12}>
           <Typography
             variant='h4'
+            data-testid='main__title'
           >
             Date Calculator
           </Typography>
