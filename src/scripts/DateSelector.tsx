@@ -52,9 +52,11 @@ const DateSelector: React.FC<IDateSelectorProps> = ({
       <TextField
         select
         className='date-selector__select'
+        data-testid='date-selector__select'
         onChange={(e) => handleDateSelection(e)}
         variant='standard'
         label='Choose a Date'
+        defaultValue=''
       >
         {dates.some(x => x.type === 'birthday') &&
           <ListSubheader>Birthdays</ListSubheader>

@@ -70,19 +70,22 @@ const Main: React.FC = () => {
             Date Calculator
           </Typography>
         </Grid>
-        <Grid item xs={12} container justifyContent='center' alignItems='center'>
-          <Grid item alignItems='center' spacing={2}>
+        <Grid item xs={12} container spacing={2} justifyContent='center' alignItems='center'>
+          <Grid item alignItems='center'>
           <Typography
-                variant='h5'
-              >
-                How many days until...
-              </Typography>
+            variant='h5'
+            data-testid='main__text__date-selector'
+          >
+            How many days until...
+          </Typography>
+          <div data-testid='main__date-selector'>
             <DateSelector
               dates={dates}
               onDateSelect={onDateSelect}
             />
-          </Grid>
-          <Grid item>
+          </div>
+        </Grid>
+          <Grid item data-testid='main__dates-admin'>
             <Tooltip title='Manage Dates'>
               <IconButton onClick={() => setShowAdminDialog(true)}>
                 <SettingsOutlinedIcon />
@@ -91,7 +94,7 @@ const Main: React.FC = () => {
           </Grid>
         </Grid>
         {selectedDate !== undefined && daysToSelectedDate !== undefined &&
-          <Grid item xs={12}>
+          <Grid item xs={12} data-testid='main__dates-results'>
             <DateResults
               selectedDate={selectedDate}
               daysToSelectedDate={daysToSelectedDate}
