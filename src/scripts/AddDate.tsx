@@ -16,6 +16,7 @@ const AddDate: React.FC<IAddDateProps> = ({
           openTo="day"
           value={new Date()}
           onChange={(date) => onDateChange(date as Date)}
+          data-testid='add-date__date-picker'
           // renderInput={(params) => <TextField {...params} />}
         />
       </LocalizationProvider>
@@ -37,6 +38,7 @@ const AddDate: React.FC<IAddDateProps> = ({
         variant='standard'
         onChange={(event) => onNameChange(event.target.value)}
         className='admin-dialog__add__textfield'
+        data-testid='testy'
       />
     </>
   )

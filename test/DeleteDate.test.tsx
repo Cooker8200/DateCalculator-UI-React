@@ -2,7 +2,6 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import '@testing-library/jest-dom';
 import React from 'react';
 import DeleteDate from "../src/scripts/DeleteDate";
-import userEvent from "@testing-library/user-event";
 
 const dates = [
   {
@@ -33,15 +32,15 @@ describe('render', () => {
   });
   it('should render the menu items', () => {
     const input = screen.getByTestId('delete-date__textfield__input');
-    userEvent.click(input);
+    fireEvent.mouseDown(input);
     const menuItems = screen.getAllByTestId('delete-date__menu-item');
+
     expect(menuItems).toHaveLength(3);
   });
   it('should call the parent component on item change', () => {
     const input = screen.getByTestId('delete-date__textfield__input');
     fireEvent.change(input, { target: { value: 'target-value' }});
-    screen.debug();
-    debugger;
+
     expect(onDeleteItemChangeMock).toHaveBeenCalledWith('target-value');
   });
 });

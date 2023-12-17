@@ -35,7 +35,9 @@ describe('render', () => {
       expect(screen.queryByTestId('main__dates-results')).toBeNull();
     });
   });
-  xdescribe('when results exist', () => {
-  
+  describe('when results exist', () => {
+    it('should render the results panel', () => {
+
+    });
   });
 });
