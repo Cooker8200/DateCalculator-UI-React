@@ -7,6 +7,7 @@ const config: Config.InitialOptions = {
   },
   testEnvironment: 'jsdom',
   testEnvironmentOptions: {},
+  setupFilesAfterEnv: ['./setupTests.js']
 };
 
 export default config;
