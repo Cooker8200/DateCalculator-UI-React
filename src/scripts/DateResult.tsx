@@ -11,11 +11,11 @@ const DateResult: React.FC<IDateResultProps> = ({
     if (daysToSelectedDate === 0) {
       return selectedDate.type === dateType.birthday ?
         <Typography>
-          It is {selectedDate.name} birthday.  HAPPY BIRTHDAY!!
+          It is {selectedDate.name}'s birthday. HAPPY BIRTHDAY!!
         </Typography>
       :
         <Typography>
-          It is {selectedDate.name}!  Let's celebrate!!
+          It is {selectedDate.name}! Let's celebrate!!
         </Typography>
     } else {
       return selectedDate.type === dateType.birthday ?

@@ -13,7 +13,7 @@ const getAllDatesResponse = [
   }
 ];
 
-describe('redner', () => {
+describe('render', () => {
   beforeEach(() => {
     getAllDatesMock.mockResolvedValueOnce(getAllDatesResponse);
     render(<Main />);
