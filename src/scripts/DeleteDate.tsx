@@ -50,15 +50,15 @@ const DeleteDate: React.FC<IDeleteDateProps> = ({
       inputProps={{ 'data-testid': 'delete-date__textfield__input' }}
     >
       {dates.some(x => x.type === 'birthday') &&
-        <ListSubheader>Birthdays</ListSubheader>
+        <ListSubheader data-testid='delete-date__menu-item__header'>Birthdays</ListSubheader>
       }
       {renderMenuItems('birthday')}
       {dates.some(x => x.type === 'holiday') &&
-        <ListSubheader>Holidays</ListSubheader>
+        <ListSubheader data-testid='delete-date__menu-item__header'>Holidays</ListSubheader>
       }
       {renderMenuItems('holiday')}
       {dates.some(x => x.type === 'other') &&
-        <ListSubheader>Other</ListSubheader>
+        <ListSubheader data-testid='delete-date__menu-item__header'>Other</ListSubheader>
       }
       {renderMenuItems('other')}
     </TextField>

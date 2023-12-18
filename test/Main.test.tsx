@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom'
 import React from 'react';
 import Main from '../src/scripts/Main';
@@ -37,7 +37,12 @@ describe('render', () => {
   });
   describe('when results exist', () => {
     it('should render the results panel', () => {
+      const combobox = screen.getByRole('combobox');
+      fireEvent.mouseDown(combobox);
+      const menuItems = screen.getAllByTestId('date-selector__menu-item');
+      fireEvent.click(menuItems[0]);
 
+      expect(screen.getByTestId('main__dates-results')).toBeInTheDocument();
     });
   });
 });

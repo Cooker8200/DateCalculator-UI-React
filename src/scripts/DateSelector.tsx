@@ -35,6 +35,7 @@ const DateSelector: React.FC<IDateSelectorProps> = ({
       <MenuItem
         key={date.name}
         value={date.date}
+        data-testid='date-selector__menu-item'
       >
         {dateType === 'birthday' ?
           `${date.name.toString()}'s Birthday`
