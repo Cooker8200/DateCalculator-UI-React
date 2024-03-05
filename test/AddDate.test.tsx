@@ -2,7 +2,6 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import '@testing-library/jest-dom';
 import React from 'react';
 import AddDate from "../src/scripts/AddDate";
-import AdminDialog from "../src/scripts/AdminDialog";
 
 const onDateChangeMock = jest.fn();
 const onTypeChangeMock = jest.fn();
