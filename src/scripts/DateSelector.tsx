@@ -35,6 +35,7 @@ const DateSelector: React.FC<IDateSelectorProps> = ({
       <MenuItem
         key={date.name}
         value={date.date}
+        data-testid='date-selector__menu-item'
       >
         {dateType === 'birthday' ?
           `${date.name.toString()}'s Birthday`
@@ -51,21 +52,23 @@ const DateSelector: React.FC<IDateSelectorProps> = ({
     return (
       <TextField
         select
-        className='date-selector__select'
+        className='date-selector__textfield'
+        data-testid='date-selector__textfield'
         onChange={(e) => handleDateSelection(e)}
         variant='standard'
         label='Choose a Date'
+        defaultValue=''
       >
         {dates.some(x => x.type === 'birthday') &&
-          <ListSubheader>Birthdays</ListSubheader>
+          <ListSubheader data-testid='date-selector__menu-item__header'>Birthdays</ListSubheader>
         }
         {renderMenuItems('birthday')}
         {dates.some(x => x.type === 'holiday') &&
-          <ListSubheader>Holidays</ListSubheader>
+          <ListSubheader data-testid='date-selector__menu-item__header'>Holidays</ListSubheader>
         }
         {renderMenuItems('holiday')}
         {dates.some(x => x.type === 'other') &&
-          <ListSubheader>Other</ListSubheader>
+          <ListSubheader data-testid='date-selector__menu-item__header'>Other</ListSubheader>
         }
         {renderMenuItems('other')}
       </TextField>

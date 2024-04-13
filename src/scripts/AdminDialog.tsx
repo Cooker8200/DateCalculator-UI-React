@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormLabel, Grid, IconButton, Radio, Typography } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormLabel, Grid, IconButton, Radio, RadioGroup, Typography } from '@mui/material';
 import DeleteDate from './DeleteDate';
 import AddDate from './AddDate';
 import { months } from '../constants/Months';
@@ -52,41 +52,51 @@ const AdminDialog: React.FC<IAdminDialogProps> = ({
         onClose={onDialogClose}
         fullWidth
         classes={{ paper: 'admin-dialog__paper' }}
+        data-testid='admin-dialog__dialog'
       >
         <DialogTitle>
           <Grid container alignItems='center'>
             <Grid item xs={1}>
-              <IconButton onClick={() => onDialogClose()}>
+              <IconButton data-testid='admin-dialog__button__close' onClick={() => onDialogClose()}>
                 <Clear />
               </IconButton>
             </Grid>
             <Grid item xs={11}>
-              <Typography variant='h5'>
+              <Typography variant='h5' data-testid='admin-dialog__dialog__title'>
                 Manage Dates
               </Typography>
             </Grid>
           </Grid>
         </DialogTitle>
         <DialogContent>
-          <Grid container direction='row' alignItems='center' spacing={3}>
-            <Grid item>
-              <Radio
-                checked={dateFunction === 'addDate'}
-                onChange={e => handleRadioChange(e.target.value)}
+          <FormControl>
+            <RadioGroup row>
+              <FormControlLabel
                 value='addDate'
-                aria-label='Add Date'
-                />
-                <FormLabel>Add Date</FormLabel>
-            </Grid>
-            <Grid item>
-              <Radio
-                checked={dateFunction === 'removeDate'}
-                onChange={e => handleRadioChange(e.target.value)}
+                label='Add Date'
+                control={
+                  <Radio
+                    checked={dateFunction === 'addDate'}
+                    onChange={e => handleRadioChange(e.target.value)}
+                    value='addDate'
+                    data-testid='admin-dialog__radio__add-date'
+                  />
+                }
+              />
+              <FormControlLabel
                 value='removeDate'
-                />
-                <FormLabel>Remove Date</FormLabel>
-            </Grid>
-          </Grid>
+                label='Remove Date'
+                control={
+                  <Radio
+                    checked={dateFunction === 'removeDate'}
+                    onChange={e => handleRadioChange(e.target.value)}
+                    value='removeDate'
+                    data-testid='admin-dialog__radio__remove-date'
+                  />
+                }
+              />
+            </RadioGroup>
+          </FormControl>
           {dateFunction === 'addDate' &&
             <AddDate
               onDateChange={onDateChange}
@@ -104,7 +114,7 @@ const AdminDialog: React.FC<IAdminDialogProps> = ({
         <DialogActions>
           <Grid container justifyContent='flex-end'>
             <Grid item>
-              <Button onClick={onDialogClose}>
+              <Button data-testid='admin-dialog__button__cancel' onClick={onDialogClose}>
                 Cancel
               </Button>
             </Grid>
@@ -112,6 +122,7 @@ const AdminDialog: React.FC<IAdminDialogProps> = ({
               <Button
                 onClick={() => onSave(dateFunction, date, name, type, dateToDelete)}
                 disabled={isSaveDisabled()}
+                data-testid='admin-dialog__button__save'
               >
                 {dateFunction === 'addDate' ?
                 'Add Date'

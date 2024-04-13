@@ -9,13 +9,14 @@ const AddDate: React.FC<IAddDateProps> = ({
   onNameChange,
 }) => {
   return (
-    <>
+    <div data-testid='add-date'>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <StaticDatePicker
           displayStaticWrapperAs="desktop"
           openTo="day"
           value={new Date()}
           onChange={(date) => onDateChange(date as Date)}
+          data-testid='add-date__date-picker'
           // renderInput={(params) => <TextField {...params} />}
         />
       </LocalizationProvider>
@@ -24,21 +25,23 @@ const AddDate: React.FC<IAddDateProps> = ({
         fullWidth
         label='Choose Type'
         onChange={(event) => onTypeChange(event.target.value as string)}
-        className='admin-dialog__add__select'
         variant='standard'
+        className='add-date__textfield__type'
+        data-testid='add-date__textfield__type'
       >
-        <MenuItem value='birthday'>Birthday</MenuItem>
-        <MenuItem value='holiday'>Holiday</MenuItem>
-        <MenuItem value='other'>Other</MenuItem>
+        <MenuItem data-testid='add-date__menu-item' value='birthday'>Birthday</MenuItem>
+        <MenuItem data-testid='add-date__menu-item' value='holiday'>Holiday</MenuItem>
+        <MenuItem data-testid='add-date__menu-item' value='other'>Other</MenuItem>
       </TextField>
       <TextField
         fullWidth
         label='Date Name'
         variant='standard'
         onChange={(event) => onNameChange(event.target.value)}
-        className='admin-dialog__add__textfield'
+        className='add-date__textfield__name'
+        data-testid='add-date__textfield__name'
       />
-    </>
+    </div>
   )
 };
 

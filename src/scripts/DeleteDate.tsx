@@ -32,6 +32,7 @@ const DeleteDate: React.FC<IDeleteDateProps> = ({
       <MenuItem
         key={date.name}
         value={date.name}
+        data-testid='delete-date__menu-item'
       >
         {`${date.name} (${date.date})`}
       </MenuItem>
@@ -39,28 +40,30 @@ const DeleteDate: React.FC<IDeleteDateProps> = ({
   };
 
   return (
-    <>
+    <div data-testid='delete-date'>
       <TextField
         select
         variant='standard'
         label='Select a Date'
         onChange={(e) => handleItemChange(e)}
         fullWidth
+        data-testid='delete-date__textfield'
+        inputProps={{ 'data-testid': 'delete-date__textfield__input' }}
       >
         {dates.some(x => x.type === 'birthday') &&
-          <ListSubheader>Birthdays</ListSubheader>
+          <ListSubheader data-testid='delete-date__menu-item__header'>Birthdays</ListSubheader>
         }
         {renderMenuItems('birthday')}
         {dates.some(x => x.type === 'holiday') &&
-          <ListSubheader>Holidays</ListSubheader>
+          <ListSubheader data-testid='delete-date__menu-item__header'>Holidays</ListSubheader>
         }
         {renderMenuItems('holiday')}
         {dates.some(x => x.type === 'other') &&
-          <ListSubheader>Other</ListSubheader>
+          <ListSubheader data-testid='delete-date__menu-item__header'>Other</ListSubheader>
         }
         {renderMenuItems('other')}
       </TextField>
-    </>
+    </div>
   )
 };
 
